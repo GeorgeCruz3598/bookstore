@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block title %} PROVEEDORES {% endblock %}
+{% block content %} 
+
+<h1>PROVEEDORES</h1>
+
+<a href="{{url_for('provider.create')}}" class="btn btn-success my-3">Nuevo Proveedor</a>
+<div class="table mt-2">
+    <table class="table table-hover table-striped">
+        <thead class="table table-dark">
+            <tr>
+                <th>ID</th><th>NOMBRE</th><th>EMAIL</th><th>TELEFONO</th><th>DIRECCION </th><th>ACTIVO ?</th> <th></th> <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in providers %}
+                <tr>
+                    <td>{{item.id}}</td>
+                    <td>{{item.name}}</td>
+                    <td>{{item.email}}</td>
+                    <td>{{item.phone}}</td>
+                    <td>{{item.address}}</td>
+                    <td>{% if item.is_active %}
+                            <p class="text-primary">SI</p>
+                        {%else%}
+                            <p class="text-danger">NO</p>
+                        {% endif %}
+                    </td>
+                    <td><a href="{{url_for('provider.edit',id=item.id)}}" class="btn btn-success">Editar</a></td>
+                    <td><a href="{{url_for('provider.delete',id=item.id)}}" class="btn btn-danger">Eliminar</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</div>
+
+
+{% endblock %}

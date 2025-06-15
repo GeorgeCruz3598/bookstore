@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block title %} STATES | UPDATE {% endblock %}
+{% block content %} 
+
+<!--only admin-->
+<h1>EDITAR ESTADO DE USO</h1>
+<form action="{{url_for('state.edit', id = state.id)}}" method="post" novalidate>  <!--category.id representa el registro enviado basado en el id-->
+    {{ form.hidden_tag() }}
+    <div class="mb-3">
+        {{ form.name.label(class="form-label") }}
+        {{ form.name(class="form-control")}}
+        {% if form.name.errors %}
+            <div class="invalid-feedback d-block">
+                {% for error in form.name.errors %}
+                    <span style="color:red">{{ error }}</span>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+    <div class="mb-3">
+        {{ form.description.label(class="form-label") }}
+        {{ form.description(class="form-control")}}
+        {% if form.description.errors %}
+            <div class="invalid-feedback d-block">
+                {% for error in form.description.errors %}
+                    <span style="color:red">{{ error }}</span>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+
+    <div class="mb-3">
+        {{ form.submit(class="btn btn-primary")}}
+    </div>
+    
+</form>
+
+{% endblock %}

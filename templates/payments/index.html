@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title %} PAYMENTS {% endblock %}
+{% block content %} 
+
+<h1> METODOS DE PAGO </h1>
+
+<a href="{{url_for('payment.create')}}" class="btn btn-success my-3">Nuevo Metodo de Pago</a>
+<div class="table mt-2">
+    <table class="table table-hover table-striped">
+        <thead class="table table-dark">
+            <tr>
+                <th>ID</th><th>METODO DE PAGO</th><th>DESCRIPCION</th><th>ACTIVO?</th><th></th> <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in payments %}
+                <tr>
+                    <td>{{item.id}}</td>
+                    <td>{{item.name}}</td>
+                    <td>{{item.description}}</td>
+                    <td>{% if item.is_active %}
+                            <p class="text-primary">SI</p>
+                        {%else%}
+                            <p class="text-danger">NO</p>
+                        {% endif %}
+                    </td>
+                    <td><a href="{{url_for('payment.edit',id=item.id)}}" class="btn btn-success">Editar</a></td>
+                    <td><a href="{{url_for('payment.delete',id=item.id)}}" class="btn btn-danger">Eliminar</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

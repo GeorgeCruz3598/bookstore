@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title %} BOOK STATES {% endblock %}
+{% block content %} 
+
+<h1> ESTADO DE USO </h1>
+
+<a href="{{url_for('state.create')}}" class="btn btn-success my-3">Nuevo Estado de Uso</a>
+<div class="table mt-2">
+    <table class="table table-hover table-striped">
+        <thead class="table table-dark">
+            <tr>
+                <th>ID</th><th>ESTADO DE USO</th><th>DESCRIPCION</th><th></th> <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in states %}
+                <tr>
+                    <td>{{item.id}}</td>
+                    <td>{{item.name}}</td>
+                    <td>{{item.description}}</td>
+                    <td><a href="{{url_for('state.edit',id=item.id)}}" class="btn btn-success">Editar</a></td>
+                    <td><a href="{{url_for('state.delete',id=item.id)}}" class="btn btn-danger">Eliminar</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

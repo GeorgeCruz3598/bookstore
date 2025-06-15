@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block title %} PAY. METHOD | UPDATE {% endblock %}
+{% block content %} 
+
+<!--only admin-->
+<h1>EDITAR METODO DE PAGO </h1>
+<form action="{{url_for('payment.edit', id = payment.id)}}" method="post" novalidate>
+    {{ form.hidden_tag() }}
+    <div class="mb-3">
+        {{ form.name.label(class="form-label") }}
+        {{ form.name(class="form-control")}}
+        {% if form.name.errors %}
+            <div class="invalid-feedback d-block">
+                {% for error in form.name.errors %}
+                    <span style="color:red">{{ error }}</span>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+    <div class="mb-3">
+        {{ form.description.label(class="form-label") }}
+        {{ form.description(class="form-control")}}
+        {% if form.description.errors %}
+            <div class="invalid-feedback d-block">
+                {% for error in form.description.errors %}
+                    <span style="color:red">{{ error }}</span>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+
+    <div class="mb-3 d-flex justify-content-center"> <!--tambien puede sr end-->
+        {{ form.is_active(class="form-check-input") }}
+        <span class="mx-2"></span>
+        {{ form.is_active.label(class="form-check-label")}}
+        {% if form.is_active.errors %}
+            <div class="invalid-feedback d-block">
+                {% for error in form.is_active.errors %}
+                    <span style="color:red">{{ error }}</span>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+    <div class="mb-3">
+        {{ form.submit(class="btn btn-primary")}}
+    </div>
+    
+</form>
+
+{% endblock %}

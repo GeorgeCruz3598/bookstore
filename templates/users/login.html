@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block title %} USERS | LOGIN {% endblock %}
+{% block content %} 
+
+<!-- all users -->
+<h1> INICIAR SESION </h1>
+
+<form action="{{url_for('user.login')}}" method="post" novalidate>
+    {{ form.hidden_tag() }}
+    <div class="mb-3">
+        {{ form.username.label(class="form-label") }}
+        {{ form.username(class="form-control")}}
+        {% if form.username.errors %}
+            <div class="invalid-feedback d-block">
+                {% for error in form.username.errors %}
+                    <span style="color:red">{{ error }}</span>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+
+    <div class="mb-3">
+        {{ form.passwd.label(class="form-label") }}
+        {{ form.passwd(class="form-control")}}
+        {% if form.passwd.errors %}
+            <div class="invalid-feedback d-block">
+                {% for error in form.passwd.errors %}
+                    <span style="color:red">{{ error }}</span>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+
+    <div class="mb-3">
+        {{ form.submit(class="btn btn-primary")}}
+    </div>
+    
+</form>
+
+{% endblock %}

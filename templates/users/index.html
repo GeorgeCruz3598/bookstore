@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block title %} USERS {% endblock %}
+{% block content %} 
+
+<h1>USUARIOS DEL SISTEMA</h1>
+
+<a href="{{url_for('user.create')}}" class="btn btn-success my-3">Nuevo Usuario</a>
+<div class="table mt-2">
+    <table class="table table-hover table-striped">
+        <thead class="table table-dark">
+            <tr>
+                <th>ID</th><th>NOMBRE</th><th>USERNAME</th><th>EMAIL</th><th>TELEFONO</th><th>ES ADMIN?</th> <th>CREACION</th> <th></th> <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in users %}
+                <tr>
+                    <td>{{item.id}}</td>
+                    <td>{{item.name}}</td>
+                    <td>{{item.username}}</td>
+                    <td>{{item.email}}</td>
+                    <td>{{item.phone}}</td>
+                    <td>{% if item.is_admin %}
+                            <p class="text-primary">SI</p>
+                        {%else%}
+                            <p class="text-danger">NO</p>
+                        {% endif %}
+                    </td>
+                    <td>{{item.created_at.strftime('%d/%m/%Y')}}</td>
+                    <td><a href="{{url_for('user.edit',id=item.id)}}" class="btn btn-success">Editar</a></td>
+                    <td><a href="{{url_for('user.delete',id=item.id)}}" class="btn btn-danger">Eliminar</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</div>
+
+
+{% endblock %}
