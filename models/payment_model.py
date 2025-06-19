@@ -9,6 +9,8 @@ class Payment(db.Model):
     description = db.Column(db.Text, nullable = False) 
     is_active = db.Column(db.Boolean, default = True)
    
+    orders_relation = db.relationship('Order', back_populates = 'payment_relation') 
+    
     def __init__(self, name, description, is_active):
         self.name = name
         self.description = description 

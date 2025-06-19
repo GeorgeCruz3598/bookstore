@@ -1,3 +1,4 @@
+from codecs import backslashreplace_errors
 from database import db
 #from flask_login import UserMixin
 
@@ -7,6 +8,8 @@ class State(db.Model):
     id = db.Column(db.Integer, primary_key = True)
     name = db.Column(db.String(100), nullable = False)
     description = db.Column(db.Text, nullable = False) 
+
+    books_relation = db.relationship('Book', back_populates='state_relation')
    
     def __init__(self, name, description):
         self.name = name
@@ -15,7 +18,6 @@ class State(db.Model):
     @staticmethod
     def get_all():
         return State.query.all()
-    
     
     @staticmethod
     def get_by_id(id):

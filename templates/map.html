@@ -1,0 +1,61 @@
+{% extends 'base.html'%}
+{% block title %} BOOKSTORE {% endblock %}
+
+{% block content %}
+<div class="container mb-5">
+    
+    <h1 class="main-title-banner text-center">Nuestras Ubicaciones</h1>
+    <p class="text-start lead mb-4">Encuentra nuestras oficinas  y puntos de recojo.</p>
+
+    <div class="row align-items-start g-4"> 
+            <div class="col-md-7"> 
+                <div class="map-container">
+                    
+                    <iframe src="https://www.google.com/maps/d/embed?mid=1h0mKUOFPW16e3I36bFoyjz_BqoJnWAM&ehbc=2E312F"
+                            width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+
+            {# Columna para las Direcciones  #}
+            <div class="col-md-5">
+                <div class="location-details-card">
+                    <h5 class="location-details-title"> Oficinas y Puntos de Recojo </h5> 
+                    <div class="location-list">
+                        {# Oficina Central #}
+                        <div class="location-item">
+                            <i class="bi bi-building-fill me-3 location-icon"></i> 
+                            <p class="location-address">
+                                <strong>Oficina Central:</strong><br>
+                                Av. Mariscal Santa Cruz Edificio Cámara de Comercio Of. 12
+                            </p>
+                        </div>
+                        
+                        {# Punto de Recojo 1 #}
+                        <div class="location-item">
+                            <i class="bi bi-pin-map-fill me-3 location-icon"></i> 
+                            <p class="location-address">
+                                <strong>Punto de Recojo 1:</strong><br>
+                                Av. 6 de Marzo esquina Calle 2 N° 32
+                            </p>
+                        </div>
+                        
+                        {# Punto de Recojo 2 #}
+                        <div class="location-item">
+                            <i class="bi bi-pin-map-fill me-3 location-icon"></i>
+                            <p class="location-address">
+                                <strong>Punto de Recojo 2:</strong><br>
+                                Ciudad Satélite Estación Teleférico Amarillo
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+{% endblock %}
+    
+{% block footer %}
+    {{super()}}
+{% endblock %}
+
+

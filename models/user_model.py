@@ -15,6 +15,10 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(100), unique = True, nullable = False)
     phone = db.Column(db.String(20), nullable = False)
     
+    contacts_relation = db.relationship('Contact', back_populates = 'user_relation', cascade="all, delete-orphan") 
+    #lazy='dynamic' permite hacr consultas directamente sobre la relacion - se define aqui
+    orders_relation = db.relationship('Order', back_populates = 'user_relation') 
+    
     def __init__(self, name, username, passwd, is_admin, email, phone):
         self.name = name
         self.username = username

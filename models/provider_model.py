@@ -11,7 +11,8 @@ class Provider(db.Model):
     address = db.Column(db.String(100), nullable = False)
     is_active = db.Column(db.Boolean, default = False)
     
-    
+    purchases_relation = db.relationship('Purchase', back_populates='provider_relation')
+     
     def __init__(self, name,  email, phone, address, is_active):
         self.name = name
         self.email = email

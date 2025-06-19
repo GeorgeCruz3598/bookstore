@@ -1,15 +1,15 @@
 {% extends 'base.html' %}
 {% block title %} PROVEEDORES {% endblock %}
 {% block content %} 
-
-<h1>PROVEEDORES</h1>
-
-<a href="{{url_for('provider.create')}}" class="btn btn-success my-3">Nuevo Proveedor</a>
-<div class="table mt-2">
-    <table class="table table-hover table-striped">
-        <thead class="table table-dark">
+<div class="container mb-5">
+<h1 class="main-title-banner text-center">Lista de Proveedores</h1>
+<a href="{{url_for('provider.create')}}" class="btn btn-success my-3">Añadir Nuevo Proveedor</a>
+<div class="table-card-container">
+<div class="table mt-2 table-responsive">
+    <table class="table table-hover table-striped custom-table">
+        <thead class="custom-table-header">
             <tr>
-                <th>ID</th><th>NOMBRE</th><th>EMAIL</th><th>TELEFONO</th><th>DIRECCION </th><th>ACTIVO ?</th> <th></th> <th></th>
+                <th>ID</th><th>NOMBRE</th><th>EMAIL</th><th>TELEFONO</th><th>DIRECCION </th><th>ACTIVO?</th> <th colspan="2" class="text-center">ACCIONES</th>
             </tr>
         </thead>
         <tbody>
@@ -26,14 +26,14 @@
                             <p class="text-danger">NO</p>
                         {% endif %}
                     </td>
-                    <td><a href="{{url_for('provider.edit',id=item.id)}}" class="btn btn-success">Editar</a></td>
-                    <td><a href="{{url_for('provider.delete',id=item.id)}}" class="btn btn-danger">Eliminar</a></td>
+                    <td><a href="{{url_for('provider.edit',id=item.id)}}" class="btn btn-sm btn-primary custom-action-btn">Editar</a></td>
+                    <td><a href="{{url_for('provider.delete',id=item.id)}}" class="btn btn-sm btn-danger custom-action-btn" onclick="return(confirm('Desea eliminar este Proveedor?'))">Eliminar</a></td>
                 </tr>
             {% endfor %}
         </tbody>
     </table>
 
 </div>
-
-
+</div>
+</div>
 {% endblock %}

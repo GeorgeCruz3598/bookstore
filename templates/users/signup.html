@@ -1,69 +1,77 @@
 {% extends 'base.html' %}
 {% block title %} USERS | SIGNUP {% endblock %}
 {% block content %} 
+<div class="container">
 <!-- all users -->
-<h1>REGISTRAR USUARIO </h1>
-<form action="{{url_for('user.signup')}}" method="post" novalidate>
-    {{ form.hidden_tag() }}
-    <div class="mb-3">
-        {{ form.name.label(class="form-label") }}
-        {{ form.name(class="form-control")}}
-        {% if form.name.errors %}
-            <div class="invalid-feedback d-block">
-                {% for error in form.name.errors %}
-                    <span style="color:red">{{ error }}</span>
-                {% endfor %}
+<h1 class="main-title-banner text-center">Registrar Usuario</h1>
+<div class="row justify-content-center"> {# Usa 'row' y 'justify-content-center' para centrar el contenido #}
+        {# Define el ancho de la columna en diferentes tamaños de pantalla #}
+    <div class="col-md-8 col-lg-6 form-panel-card">
+        <form action="{{url_for('user.signup')}}" method="post" novalidate>
+            {{ form.hidden_tag() }}
+            <div class="mb-3">
+                {{ form.name.label(class="form-label") }}
+                {{ form.name(class="form-control")}}
+                {% if form.name.errors %}
+                    <div class="invalid-feedback d-block">
+                        {% for error in form.name.errors %}
+                            <span style="color:red">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% endif %}
             </div>
-        {% endif %}
-    </div>
-    <div class="mb-3">
-        {{ form.username.label(class="form-label") }}
-        {{ form.username(class="form-control")}}
-        {% if form.username.errors %}
-            <div class="invalid-feedback d-block">
-                {% for error in form.username.errors %}
-                    <span style="color:red">{{ error }}</span>
-                {% endfor %}
+            <div class="mb-3">
+                {{ form.username.label(class="form-label") }}
+                {{ form.username(class="form-control")}}
+                {% if form.username.errors %}
+                    <div class="invalid-feedback d-block">
+                        {% for error in form.username.errors %}
+                            <span style="color:red">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% endif %}
             </div>
-        {% endif %}
-    </div>
-    <div class="mb-3">
-        {{ form.passwd.label(class="form-label") }}
-        {{ form.passwd(class="form-control")}}
-        {% if form.passwd.errors %}
-            <div class="invalid-feedback d-block">
-                {% for error in form.passwd.errors %}
-                    <span style="color:red">{{ error }}</span>
-                {% endfor %}
+            <div class="mb-3">
+                {{ form.passwd.label(class="form-label") }}
+                {{ form.passwd(class="form-control", placeholder="Escriba su Contraseña")}}
+                {% if form.passwd.errors %}
+                    <div class="invalid-feedback d-block">
+                        {% for error in form.passwd.errors %}
+                            <span style="color:red">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% endif %}
             </div>
-        {% endif %}
-    </div>
-    <div class="mb-3">
-        {{ form.email.label(class="form-label") }}
-        {{ form.email(class="form-control")}}
-        {% if form.email.errors %}
-            <div class="invalid-feedback d-block">
-                {% for error in form.email.errors %}
-                    <span style="color:red">{{ error }}</span>
-                {% endfor %}
+            <div class="mb-3">
+                {{ form.email.label(class="form-label") }}
+                {{ form.email(class="form-control")}}
+                {% if form.email.errors %}
+                    <div class="invalid-feedback d-block">
+                        {% for error in form.email.errors %}
+                            <span style="color:red">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% endif %}
             </div>
-        {% endif %}
-    </div>
-    <div class="mb-3">
-        {{ form.phone.label(class="form-label") }}
-        {{ form.phone(class="form-control")}}
-        {% if form.phone.errors %}
-            <div class="invalid-feedback d-block">
-                {% for error in form.phone.errors %}
-                    <span style="color:red">{{ error }}</span>
-                {% endfor %}
+            <div class="mb-3">
+                {{ form.phone.label(class="form-label") }}
+                {{ form.phone(class="form-control")}}
+                {% if form.phone.errors %}
+                    <div class="invalid-feedback d-block">
+                        {% for error in form.phone.errors %}
+                            <span style="color:red">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% endif %}
             </div>
-        {% endif %}
+            <div class="my-3 d-flex justify-content-center">
+                {{ form.submit(class="btn btn-primary")}}
+                <span class="mx-3"></span>
+                {{ form.cancel(class="btn btn-danger")}}
+            </div>
+            
+        </form>
     </div>
-    <div class="mb-3">
-        {{ form.submit(class="btn btn-primary")}}
-    </div>
-    
-</form>
-
+</div>
+</div>
 {% endblock %}

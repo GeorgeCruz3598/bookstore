@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% block title %} PURCHASE | CREATE {% endblock %}
+{% block content %} 
+<div class="container">
+<!--only admin-->
+<h1 class="main-title-banner text-center">Nueva Compra</h1>
+
+<div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6 form-panel-card">
+        <form action="{{url_for('purchase.create')}}" method="post" novalidate>
+            {{ form.hidden_tag() }}
+            
+            <div class="mb-3">
+                {{ form.quantity.label(class="form-label") }}
+                {{ form.quantity(class="form-control")}} 
+                {% if form.quantity.errors %}
+                    <div class="invalid-feedback d-block">
+                        {% for error in form.quantity.errors %}
+                            <span style="color:red">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+            <div class="mb-3">
+                {{ form.detail.label(class="form-label") }}
+                {{ form.detail(class="form-control")}} 
+                {% if form.detail.errors %}
+                    <div class="invalid-feedback d-block">
+                        {% for error in form.detail.errors %}
+                            <span style="color:red">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+            
+            <div class="mb-1">
+                {{ form.book_id.label(class="form-label") }}
+                {{ form.book_id(class="form-control")}} 
+                {% if form.book_id.errors %}
+                    <div class="invalid-feedback d-block">
+                        {% for error in form.book_id.errors %}
+                            <span style="color:red">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
+            </div>
+
+            <div class="mb-3"> 
+                <a href="{{url_for('book.create', next=request.path)}}" class="btn btn-sm btn-info mt-2">Añadir Nuevo Libro</a>
+            </div>
+
+            <div class="mb-3">
+                {{ form.provider_id.label(class="form-label") }}
+                {{ form.provider_id(class="form-control")}} 
+                {% if form.provider_id.errors %}
+                    <div class="invalid-feedback d-block">
+                        {% for error in form.provider_id.errors %}
+                            <span style="color:red">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="mb-3 d-flex justify-content-center">
+                {{ form.submit(class="btn btn-primary")}}
+                <span class="mx-3"></span>
+                {{ form.cancel(class="btn btn-danger")}}
+            </div>
+            
+        </form>
+    </div>
+</div>
+</div>
+{% endblock %}

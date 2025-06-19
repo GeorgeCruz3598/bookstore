@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block title %} CONTACT US {% endblock %}
+{% block content %} 
+
+<div class="container mb-5">
+<h1 class="main-title-banner text-center">Historial de Contactos</h1>
+
+<!--solo desde Tab CONTACTANOS se podra crear un mensaje-->
+<div class="table-card-container ">
+<div class="table mt-2 table-responsive">
+    <table class="table table-hover table-striped custom-table">
+        <thead class="custom-table-header">
+            <tr>
+                <th>ID</th><th>NOMBRE</th><th>CORREO</th><th>TELEFONO</th><th>MENSAJE</th><th colspan="2" class="text-center">ACCIONES</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in contacts %}
+                <tr>
+                    <td>{{item.id}}</td>
+                    <td>{{item.user_relation.name}}</td> <!--accede a datos a traves de la relacion-->
+                    <td>{{item.user_relation.email}}</td>
+                    <td>{{item.user_relation.phone}}</td>
+
+                    <td>{{item.message}}</td>
+
+                    <td><a href="{{url_for('contact.delete',id=item.id)}}" class="btn btn-sm btn-danger custom-action-btn" onclick="return(confirm('Desea eliminar este Mensaje?'))">Eliminar</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+</div>
+
+</div>
+{% endblock %}

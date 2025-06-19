@@ -1,3 +1,4 @@
+
 from database import db
 #from flask_login import UserMixin
 
@@ -9,6 +10,8 @@ class Category(db.Model):
     description = db.Column(db.Text, nullable = False) 
     is_active = db.Column(db.Boolean, default = True)
    
+    books_relation = db.relationship('Book', back_populates='category_relation')
+    
     def __init__(self, name, description, is_active):
         self.name = name
         self.description = description 
@@ -20,7 +23,7 @@ class Category(db.Model):
     
     @staticmethod
     def get_all_active():
-        return Category.query.filter(Category.is_active == True).all()
+        return Category.query.filter(Category.is_active == True).order_by(Category.name).all()
     
     @staticmethod
     def get_by_id(id):

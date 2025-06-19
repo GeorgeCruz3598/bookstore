@@ -1,0 +1,388 @@
+body {
+    
+    background-color:  #f5f5dc; /* O un tono similar como #f0ebd8, #f5f5dc (beige) */
+    
+    color: #333; 
+}
+
+.custom-card-img {
+    height: 250px; /* Altura fija para todas las imágenes */
+    object-fit: cover; /* Recorta la imagen para que quepa sin distorsionar */
+    width: 100%; /* Asegura que la imagen ocupe todo el ancho de su contenedor */
+}
+
+.card {
+    margin-bottom: 10px; 
+    /*box-shadow: 0 10px 25px rgba(0,0,0,0.4); */
+    box-shadow:  1 10px 30px rgba(0, 0, 0, 0.15);
+    border: 2px solid #f0f0f094; /* Un borde muy sutil para definirlo */
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+/* Efecto al pasar el ratón sobre card */
+.card:hover {
+    transform: translateY(-8px); /* Un ligero levantamiento para indicar interactividad */
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25); /* Sombra más pronunciada al hacer hover */
+}
+
+/*Link disabled style like button*/
+.disabled-link {
+  pointer-events: none;       /* Evita clics */
+  opacity: 0.65;              /* Hace el botón más tenue */
+  cursor: not-allowed;        /* Muestra el ícono de prohibido */
+}
+
+/*Button Alert faded animation*/
+.alert.fade {
+    /* Duración de la transición: de 0.3s (defecto de Bootstrap) a 0.8s */
+    transition: opacity 0.8s ease-out; /* Puedes ajustar 0.8s y 'ease-out' */
+    opacity: 0;
+}
+
+.alert.fade.show {
+    opacity: 1;
+}
+
+.footer {
+    /* Si mt-auto no funciona como esperas, podrías necesitar un estilo más manual
+       para empujar el footer hacia abajo, por ejemplo, si tu body no es flex. */
+    background-color: #333;  /* Ejemplo si no usas bg-dark de Bootstrap */
+    color: #fff; /* Ejemplo si no usas text-white de Bootstrap
+}
+
+.footer .list-inline-item a {
+    /* Para los enlaces del footer, si quieres cambiar su color, hover, etc. */
+    color: #bbb !important; /* Un poco más claro */
+}
+
+.footer .list-inline-item a:hover {
+    color: #fff !important; /* Blanco al pasar el ratón */
+}
+
+.footer p {
+    font-size: 0.9em;
+}
+
+/*Para titulos*/
+.main-title-banner {
+    position: relative; /* Necesario para la sombra y cualquier detalle futuro */
+    display: block; /* Ocupa el ancho disponible */
+    width: fit-content; /* El ancho se ajusta al contenido del texto */
+    padding: 25px 50px; /* Relleno generoso para que se vea como un banner */
+    margin: 15px auto 40px auto; /* Centrar horizontalmente y dar buen espacio */
+    
+    /* Colores y tipografía para un toque rústico/vintage */
+    background-color: #7a5230; /* Un marrón tierra cálido y oscuro */
+    color: #f8f5ed; /* El mismo color crema/beige de tu fondo del body para el texto */
+    font-family: 'Playfair Display', serif; /* Fuente serif elegante y clásica */
+    font-size: 2em; /* Tamaño prominente */
+    text-align: center;
+    text-transform: uppercase; /* Para un aspecto más formal y de "banderola" */
+    letter-spacing: 2px; /* Espaciado entre letras para mejor lectura */
+    line-height: 1.2; /* Altura de línea */
+
+    /* Sombra para darle profundidad y que "flote" un poco */
+    box-shadow: 0 10px 25px rgba(0,0,0,0.4); 
+    
+    /* Bordes ligeramente redondeados */
+    border-radius: 8px;
+
+    /* Para que el texto no se rompa en varias líneas si es muy largo en pantallas pequeñas */
+    white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 90%; /* Limita el ancho máximo para pantallas muy estrechas */
+}
+
+/* Ajustes para pantallas más pequeñas */
+@media (max-width: 768px) {
+    .main-title-banner {
+        font-size: 1.8em; /* Tamaño más pequeño en móviles */
+        padding: 20px 30px;
+    }
+}
+
+@media (max-width: 576px) {
+    .main-title-banner {
+        font-size: 1em; /* Aún más pequeño en móviles */
+        padding: 15px 20px;
+    }
+}
+
+/* Estilo para el panel del formulario */
+.form-panel-card {
+    background-color: #ffffff; /* Fondo blanco puro para el formulario */
+    padding: 35px; /* Espacio interior generoso */
+    border-radius: 12px; /* Bordes redondeados para un toque suave */
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15); /* Sombra más pronunciada para un efecto de "tarjeta flotante" */
+    margin-bottom: 50px; /* Margen inferior para separarlo del footer o contenido siguiente */
+    border: 1px solid #f0f0f0; /* Un borde muy sutil para definirlo */
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Transición para efectos de hover */
+}
+
+/* Efecto al pasar el ratón sobre el formulario (opcional) */
+.form-panel-card:hover {
+    transform: translateY(-8px); /* Un ligero levantamiento para indicar interactividad */
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25); /* Sombra más pronunciada al hacer hover */
+}
+
+/* Ajustes para las etiquetas (labels) dentro del formulario */
+.form-panel-card .form-label {
+    font-weight: 600; /* Un poco más de negrita para destacar las etiquetas */
+    color: #4a4a4a; /* Un gris oscuro suave para las etiquetas */
+    margin-bottom: 8px; /* Espacio debajo de la etiqueta */
+}
+
+/* Ajustes para los campos de entrada (inputs) */
+.form-panel-card .form-control {
+    border-color: #d1d9e6; /* Un color de borde suave */
+    border-radius: 6px;
+    padding: 12px 18px; /* Padding interior para campos más altos */
+    font-size: 1.05em; /* Un tamaño de fuente ligeramente más grande */
+}
+
+/* Color del borde y sombra al enfocar un campo */
+.form-panel-card .form-control:focus {
+    border-color: #a0522d; /* Color de enfoque que combine con tu tema (marrón tierra) */
+    box-shadow: 0 0 0 0.25rem rgba(160, 82, 45, 0.2); /* Sombra de enfoque con el color de tu tema y transparencia */
+}
+
+/* Estilo específico para el checkbox is_admin */
+.form-panel-card .form-check-label {
+    font-weight: normal; /* Asegura que la etiqueta del checkbox no esté en negrita extrema */
+    color: #4a4a4a;
+}
+
+/* Mensajes de error */
+.form-panel-card .invalid-feedback {
+    font-size: 0.9em;
+    margin-top: 5px;
+    color: #dc3545; /* Rojo estándar de Bootstrap para errores */
+}
+
+/* Estilo para los botones */
+.form-panel-card .btn-primary {
+    background-color: #0d6efd;
+; /* El mismo color marrón tierra que en el título */
+    border-color: #0e52b8;
+    padding: 10px 25px;
+    font-size: 1.1em;
+    border-radius: 5px;
+}
+.form-panel-card .btn-primary:hover {
+    background-color: #0e52b8; /* Un tono más oscuro al pasar el ratón */
+    border-color: #0c459b;
+}
+
+.form-panel-card .btn-secondary {
+    background-color: #6c757d; /* Gris estándar de Bootstrap */
+    border-color: #6c757d;
+    padding: 10px 25px;
+    font-size: 1.1em;
+    border-radius: 5px;
+}
+.form-panel-card .btn-secondary:hover {
+    background-color: #5a6268;
+    border-color: #545b62;
+}
+
+.form-panel-card textarea.form-control {
+    min-height: 120px;
+}
+
+/* Puedes mantener el mismo estilo de enfoque para textareas */
+.form-panel-card textarea.form-control:focus {
+    border-color: #a0522d; /* Color de enfoque consistente con los otros campos */
+    box-shadow: 0 0 0 0.25rem rgba(160, 82, 45, 0.2); /* Sombra de enfoque consistente */
+}
+
+.form-panel-card select.form-control {
+    
+    -webkit-appearance: none; /* Para navegadores basados en WebKit (Chrome, Safari, Edge) */
+    -moz-appearance: none;    /* Para Firefox */
+    appearance: none;         /* Propiedad estándar */
+    
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23a0522d' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center; /* Posicionar la flecha a la derecha, centrada verticalmente */
+    background-size: 16px 12px; /* Tamaño de la flecha */
+    
+    /* Añadir padding extra a la derecha para que el texto no se solape con la flecha */
+    padding-right: 2.5rem; 
+    
+    cursor: pointer; /* Indicar que el elemento es interactivo */
+}
+
+/* Mantener el estilo de enfoque consistente con los otros campos */
+.form-panel-card select.form-control:focus {
+    border-color: #a0522d; /* Color de enfoque consistente con tu tema */
+    box-shadow: 0 0 0 0.25rem rgba(160, 82, 45, 0.2); /* Sombra de enfoque consistente */
+    outline: 0; /* Eliminar el outline por defecto en algunos navegadores para un look más limpio */
+}
+
+.form-panel-card select.form-control option {
+    color: #333; /* Color de texto para las opciones */
+    background-color: #ffffff; /* Fondo blanco para las opciones */
+    /* Otros estilos como font-family o font-size no suelen aplicarse consistentemente aquí */
+}
+
+
+/* Estilos para el contenedor de la portada actual (imagen) */
+.current-cover-preview {
+    margin-top: 10px;
+    margin-bottom: 20px; /* Espacio debajo de la imagen */
+}
+
+.current-cover-preview img {
+    max-width: 150px; /* Define el ancho máximo de la imagen de portada actual */
+    height: auto; /* Mantiene la proporción */
+    border-radius: 8px; /* Bordes ligeramente redondeados */
+    border: 1px solid #e0e0e0; /* Un borde sutil */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1); /* Sombra para la imagen */
+    object-fit: cover; /* Asegura que la imagen se ajuste bien si tiene dimensiones raras */
+}
+
+/* Estilo para el botón personalizado de subida de archivo */
+.custom-file-upload-button {
+    /* Colores basados en tu paleta de librería */
+    background-color: #f8f5ed; /* El mismo color crema/beige de tu fondo de página */
+    color: #264097; /* Tu color temático de marrón tierra para el texto */
+    border: 1px solid #264097; /* Borde con tu color temático */
+    
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer; /* Cambiar el cursor para indicar que es clickeable */
+    
+    /* Efectos de transición para un look profesional */
+    transition: all 0.3s ease;
+    
+    /* Para alinear el ícono y el texto dentro del botón */
+    display: inline-flex;
+    align-items: center;
+    font-weight: 500; /* Un poco más de peso a la fuente */
+}
+
+/* Efecto al pasar el ratón sobre el botón personalizado */
+.custom-file-upload-button:hover {
+    background-color:#213883; /* Fondo con tu color temático */
+    color: #ffffff; /* Texto blanco al pasar el ratón */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15); /* Sombra sutil al pasar el ratón */
+}
+
+/* Estilo para el texto que muestra el nombre del archivo seleccionado */
+#fileNameDisplay {
+    font-size: 0.95em;
+    font-style: italic;
+    color: #6c757d; /* Gris de Bootstrap para texto mutado */
+    margin-left: 15px; /* Espacio entre el botón y el nombre del archivo */
+}
+
+.table-card-container {
+    background-color: #ffffff; /* Fondo blanco */
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1); /* Sombra suave, consistente con otros paneles */
+    border: 1px solid #e0e0e0; /* Borde sutil */
+    padding: 25px; /* Espacio interno para que la tabla no toque los bordes del contenedor */
+    overflow-x: auto; /* Asegura que la tabla sea responsive y se desplace horizontalmente si es muy ancha */
+    width: 100%;
+}
+
+
+/* Estilos generales para la tabla personalizada */
+.custom-table {
+    width: 100%; /* Asegura que la tabla ocupe todo el ancho disponible */
+    margin-bottom: 0; /* Elimina el margen inferior por defecto de Bootstrap */
+    border-collapse: separate; /* Necesario para que border-radius funcione en las celdas de encabezado */
+    border-spacing: 0; /* Elimina el espacio entre celdas */
+}
+
+/* Estilo para el encabezado de la tabla (<thead>) */
+.custom-table-header {
+    background-color: #7a5230; /* Tu color temático oscuro de la paleta */
+    color: #ffffff; /* Texto blanco para un buen contraste */
+}
+
+.custom-table-header th {
+    padding: 15px 20px; /* Más padding para los encabezados */
+    font-weight: 600; /* Un poco más de peso a la fuente */
+    border-bottom: 2px solid #5f5f64; /* Línea inferior más pronunciada del color temático */
+    text-transform: uppercase; /* Convertir el texto a mayúsculas */
+    font-size: 0.9em; /* Tamaño de fuente ligeramente más pequeño */
+    letter-spacing: 0.5px; /* Espaciado entre letras sutil */
+}
+
+/*  Redondear las esquinas superiores del encabezado */
+.custom-table-header tr:first-child th:first-child {
+    border-top-left-radius: 8px; /* Redondea la esquina superior izquierda */
+}
+
+.custom-table-header tr:first-child th:last-child {
+    border-top-right-radius: 8px; /* Redondea la esquina superior derecha */
+}
+
+/* Estilo para el cuerpo de la tabla (filas y celdas) */
+.custom-table tbody tr {
+    transition: background-color 0.2s ease; /* Transición suave al pasar el ratón */
+}
+
+/* Estilo para filas al pasar el ratón (table-hover) */
+.custom-table tbody tr:hover {
+    background-color: #f0f0f0; /* Color de fondo suave al pasar el ratón */
+}
+
+/* Estilo para filas impares (striped effect) */
+.custom-table.table-striped tbody tr:nth-of-type(odd) {
+    background-color: #fdfdfd; /* Un blanco muy ligero o un gris muy sutil para las rayas */
+}
+
+/* Estilo para filas pares (striped effect) */
+.custom-table.table-striped tbody tr:nth-of-type(even) {
+    background-color: #ffffff; /* Fondo blanco para las filas pares */
+}
+
+.custom-table tbody td {
+    padding: 12px 20px; /* Padding para las celdas del cuerpo */
+    vertical-align: middle; /* Alineación vertical del contenido */
+    color: #555; /* Color de texto más suave */
+    font-size: 0.95em; /* Tamaño de fuente ligeramente más pequeño */
+    border-top: 1px solid #eee; /* Borde superior sutil entre filas */
+}
+
+/* Opcional: Eliminar el borde superior de la primera fila del tbody para una transición más suave con el thead */
+.custom-table tbody tr:first-child td {
+    border-top: none;
+}
+
+/* NUEVO: Estilos para los botones de acción dentro de la tabla */
+.custom-action-btn {
+    font-size: 0.85em; /* Tamaño de fuente más pequeño para botones de tabla */
+    padding: 6px 12px; /* Padding ajustado */
+    border-radius: 5px; /* Bordes redondeados */
+    transition: all 0.3s ease; /* Transición suave al pasar el ratón */
+}
+
+/* Puedes personalizar los colores de los botones de Bootstrap (btn-danger) si lo deseas */
+.custom-action-btn.btn-danger {
+    background-color: #dc3545; /* Rojo de Bootstrap */
+    border-color: #dc3545;
+}
+
+.custom-action-btn.btn-danger:hover {
+    background-color: #c82333; /* Rojo más oscuro al pasar el ratón */
+    border-color: #bd2130;
+}
+
+/* NUEVO: Centrar el contenido de la columna de ACCIONES */
+.custom-table th:last-child,
+.custom-table td:last-child {
+    text-align: center;
+}
+
+.map-container {
+            border-radius: 10px; /* Bordes redondeados para el mapa */
+            overflow: hidden; /* Asegura que el iframe respete el border-radius */
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15); /* Sombra para el mapa */
+        }
+.map-container iframe {
+            display: block; /* Elimina espacio extra debajo del iframe */
+        }

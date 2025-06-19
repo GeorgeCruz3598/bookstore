@@ -4,6 +4,8 @@ from decorators import admin_required
 from logmanagerconfig import login_manager
 
 from models.user_model import User
+from models.order_model import Order
+
 from views import user_view
 
 from forms.form_users import CreateForm, LoginForm, EditForm
@@ -27,7 +29,12 @@ def index():
 @admin_required #if not flash + redirect to "/"
 def create():
     form = CreateForm()
+   
+    if 'cancel' in request.form:
+        return redirect(url_for('user.index'))
+    
     if form.validate_on_submit():
+
         name =  form.name.data
         username = form.username.data
         passwd = form.passwd.data
@@ -50,7 +57,13 @@ def create():
 def edit(id):
     user = User.get_by_id(id)
     form = EditForm(obj=user)
+    
+    if 'cancel' in request.form:
+        return redirect(url_for('user.index'))
+    
     if form.validate_on_submit() or request.method == 'POST':
+        if form.cancel.data:
+            return redirect(url_for('user.index'))
         form.populate_obj(user)        
         # isolated process for password
         passwd = request.form.get('passwd')
@@ -68,6 +81,11 @@ def edit(id):
 @admin_required
 def delete(id):
     user = User.get_by_id(id)
+    orders_count = Order.get_by_user_id_count(id)
+    if orders_count > 0:
+        flash(f"No se puede eliminar el usuario '{user.username}'({user.name}) porque tiene {orders_count} pedidos asociados."
+                f"\tPor favor, elimine o reasigne los pedidos antes de proseguir. ",'danger') #danger
+        return redirect(url_for('order.index'))
     user.delete()
     flash("Succesfully Removed","success")
     return redirect(url_for('user.index'))
@@ -78,6 +96,10 @@ def signup():
         flash('You are already in, you cannot signup',"warning")
         return redirect(url_for('index'))
     form = CreateForm()
+   
+    if 'cancel' in request.form:
+        return redirect(url_for('index'))
+    
     if form.validate_on_submit():
         name = form.name.data
         username = form.username.data
@@ -101,7 +123,12 @@ def login():
         flash('You are already logged in',"warning")
         return redirect(url_for('index'))
     form = LoginForm()
+    
+    if 'cancel' in request.form:
+        return redirect(url_for('index'))
+    
     if form.validate_on_submit():
+        
         user = User.get_by_username(form.username.data)
         if user and user.verify_passwd(form.passwd.data):
             login_user(user)

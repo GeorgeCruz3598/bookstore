@@ -4,6 +4,7 @@ from decorators import admin_required
 from logmanagerconfig import login_manager
 
 from models.user_model import User
+from  models.order_model import Order
 
 from models.payment_model  import Payment
 from views import payment_view
@@ -27,6 +28,10 @@ def index():
 @admin_required #if not flash + redirect to run.index 
 def create():
     form = CreateForm()
+    
+    if 'cancel' in request.form:
+        return redirect(url_for('payment.index'))
+    
     if form.validate_on_submit():
         name =  form.name.data
         description = form.description.data
@@ -47,6 +52,10 @@ def create():
 def edit(id):
     payment = Payment.get_by_id(id)
     form = EditForm(obj=payment)
+    
+    if 'cancel' in request.form:
+        return redirect(url_for('payment.index'))
+    
     if form.validate_on_submit():
         form.populate_obj(payment)        
         try:
@@ -62,6 +71,12 @@ def edit(id):
 @admin_required
 def delete(id):
     payment = Payment.get_by_id(id)
-    payment.delete()
-    flash("Succesfully Removed","success")
-    return redirect(url_for('payment.index'))
+    orders_count = Order.get_by_payment_id_count(id)
+    if orders_count > 0:
+        flash(f"No se puede eliminar el metodo de pago '{payment.name}' porque tiene {orders_count} pedidos asociados."
+              f"\tPor favor, elimine o reasigne los pedidos antes de proseguir. ",'danger') #danger
+        return redirect(url_for('order.index'))
+    else:    
+        payment.delete()
+        flash("Succesfully Removed","success")
+        return redirect(url_for('payment.index'))

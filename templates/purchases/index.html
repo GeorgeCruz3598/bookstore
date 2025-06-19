@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block title %} PURCHASES {% endblock %}
+{% block content %} 
+
+<div class="container mb-5">
+<h1 class="main-title-banner text-center">Historial de Compras</h1>
+
+<a href="{{url_for('purchase.create')}}" class="btn btn-success my-3">Añadir Nueva Compra</a>
+<div class="table-card-container">
+<div class="table mt-2 table-responsive">
+    <table class="table table-hover table-striped custom-table">
+        <thead class="custom-table-header">
+            <tr>
+                <th>ID</th><th>FECHA</th><th>PROVEEDOR</th><th>TITULO DEL LIBRO</th><th>CANTIDAD</th><th>PRECIO UNITARIO</th><th>TOTAL</th> <th colspan="3" class="text-center">ACCIONES</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in purchases %}
+                <tr>
+                    <td>{{item.id}}</td>
+                    <td>{{item.create_at.strftime('%d/%m/%Y')}}</td>
+                    <td>{{item.provider_relation.name}}</td>
+                    <td>{{item.book_relation.title}}</td>
+                    <td>{{item.quantity}}</td>
+                    <td>{{item.book_relation.price}}</td>
+                    <td>{{"%.2f"|format(item.total)}}</td>
+
+                    <td><a href="{{url_for('purchase.edit',id=item.id)}}" class="btn btn-sm btn-primary custom-action-btn">Editar</a></td>
+                    <td><a href="{{url_for('purchase.delete',id=item.id)}}" class="btn btn-sm btn-danger custom-action-btn" onclick="return(confirm('Desea eliminar esta Compra?'))">Eliminar</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+</div>
+</div>
+
+
+{% endblock %}

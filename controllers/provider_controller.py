@@ -5,6 +5,7 @@ from decorators import admin_required
 from logmanagerconfig import login_manager
 
 from models.user_model import User
+from models.purchase_model import Purchase
 
 from models.provider_model  import Provider
 from views import provider_view
@@ -29,6 +30,10 @@ def index():
 @admin_required #if not flash + redirect to run.index 
 def create():
     form = CreateForm()
+    
+    if 'cancel' in request.form:
+        return redirect(url_for('provider.index'))
+    
     if form.validate_on_submit():
         name =  form.name.data
         email = form.email.data
@@ -51,6 +56,10 @@ def create():
 def edit(id):
     provider = Provider.get_by_id(id)
     form = EditForm(obj=provider) # populate form fields with same name object fields
+    
+    if 'cancel' in request.form:
+        return redirect(url_for('provider.index'))
+    
     if form.validate_on_submit():
         form.populate_obj(provider)       #store changes 
         try:
@@ -66,6 +75,13 @@ def edit(id):
 @admin_required
 def delete(id):
     provider = Provider.get_by_id(id)
-    provider.delete()
-    flash("Succesfully Removed","success")
-    return redirect(url_for('provider.index'))
+    purchase_count = Purchase.get_by_provider_id_count(provider.id)
+    
+    if purchase_count > 0:
+        flash(f"No se puede eliminar el proveedor '{provider.name}' porque tiene {purchase_count} compras asociadas."
+              f"\tPor favor, elimine o reasigne las compras antes de proseguir. ",'danger') #danger
+        return redirect(url_for('purchase.index'))
+    else:
+        provider.delete()
+        flash("Succesfully Removed","success")
+        return redirect(url_for('provider.index'))

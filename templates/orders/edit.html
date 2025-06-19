@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% block title %} ORDER | UPDATE {% endblock %}
+{% block content %} 
+<div class="container">
+<!--only admin-->
+<h1 class="main-title-banner text-center">Editar Pedido</h1>
+
+<div class="row justify-content-center"> {# Usa 'row' y 'justify-content-center' para centrar el contenido #}
+        {# Define el ancho de la columna en diferentes tamaños de pantalla #}
+    <div class="col-md-8 col-lg-6 form-panel-card">
+
+        <div class="text-center mb-3 border-top border-bottom d-flex justify-content-center">
+            <div class="flex-shrink-0 me-3">
+                <h4 class="text-muted mt-3 mb-2"> Libro: {{book.title}} (Bs. {{book.price}})</h4>
+                <h5 class="text-muted mb-3"> Usuario: {{order.user_relation.username}} ({{order.user_relation.name}})</h5>
+                <img src="{{ url_for('static', filename='uploads/covers/' + book.cover) }}" 
+                        class="card-img-top custom-card-img img-fluid rounded mb-3" alt="Portada de {{ book.title }}" 
+                        style="max-width: 150px; height: auto;">
+            </div>    
+        </div>
+
+        <form action="{{url_for('order.edit',id=order.id)}}" method="post" novalidate>
+            {{ form.hidden_tag() }}
+            <div class="mb-3">
+                {{ form.quantity.label(class="form-label") }}
+                {{ form.quantity(class="form-control")}} 
+                {% if form.quantity.errors %}
+                    <div class="invalid-feedback d-block">
+                        {% for error in form.quantity.errors %}
+                            <span style="color:red">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+            <div class="mb-3">
+                {{ form.payment_id.label(class="form-label") }}
+                {{ form.payment_id(class="form-control")}} 
+                {% if form.payment_id.errors %}
+                    <div class="invalid-feedback d-block">
+                        {% for error in form.payment_id.errors %}
+                            <span style="color:red">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+            
+            <div class="my-3 d-flex justify-content-center">
+                {{ form.submit(class="btn btn-primary")}}
+                <span class="mx-3"></span>
+                {{ form.cancel(class="btn btn-danger")}}
+            </div>
+            
+        </form>
+    </div>
+</div>
+</div>
+{% endblock %}

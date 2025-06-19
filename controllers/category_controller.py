@@ -4,6 +4,7 @@ from decorators import admin_required
 from logmanagerconfig import login_manager
 
 from models.user_model import User
+from models.book_model import Book
 
 from models.category_model  import Category
 from views import category_view
@@ -28,6 +29,10 @@ def index():
 @admin_required #if not flash + redirect to run.index 
 def create():
     form = CreateForm()
+    
+    if 'cancel' in request.form:
+        return redirect(url_for('category.index'))
+    
     if form.validate_on_submit():
         name =  form.name.data
         description = form.description.data
@@ -48,6 +53,10 @@ def create():
 def edit(id):
     category = Category.get_by_id(id)
     form = EditForm(obj=category)
+    
+    if 'cancel' in request.form:
+        return redirect(url_for('category.index'))
+    
     if form.validate_on_submit():
         form.populate_obj(category)        
         try:
@@ -63,6 +72,12 @@ def edit(id):
 @admin_required
 def delete(id):
     category = Category.get_by_id(id)
-    category.delete()
-    flash("Succesfully Removed","success")
+    book_count = Book.get_by_category_id_count(id)   
+    if book_count > 0:
+        flash(f"No se puede eliminar la categoria '{category.name}' porque tiene {book_count} libros asociados."
+              f"\tPor favor, elimine o reasigne los libros antes de proseguir. ",'danger') #danger
+        return redirect(url_for('book.index'))
+    else:     
+        category.delete()
+        flash("Succesfully Removed","success")
     return redirect(url_for('category.index'))

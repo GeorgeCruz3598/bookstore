@@ -4,6 +4,7 @@ from decorators import admin_required
 from logmanagerconfig import login_manager
 
 from models.user_model import User
+from models.book_model import Book
 
 from models.state_model  import State
 from views import state_view
@@ -28,6 +29,10 @@ def index():
 @admin_required #if not flash + redirect to run.index 
 def create():
     form = CreateForm()
+    
+    if 'cancel' in request.form:
+            return redirect(url_for('state.index'))
+        
     if form.validate_on_submit():
         name =  form.name.data
         description = form.description.data
@@ -47,6 +52,10 @@ def create():
 def edit(id):
     state = State.get_by_id(id)
     form = EditForm(obj=state)
+    
+    if 'cancel' in request.form:
+            return redirect(url_for('state.index'))
+        
     if form.validate_on_submit():
         form.populate_obj(state)        
         try:
@@ -62,6 +71,12 @@ def edit(id):
 @admin_required
 def delete(id):
     state = State.get_by_id(id)
-    state.delete()
-    flash("Succesfully Removed","success")
-    return redirect(url_for('state.index'))
+    book_count = Book.get_by_state_id_count(id)
+    if book_count > 0 :
+        flash(f"No se puede eliminar el estado '{state.name}' porque tiene {book_count} libros asociados."
+              f"\tPor favor, elimine o reasigne los libros antes de proseguir. ",'danger') #danger
+        return redirect(url_for('book.index'))
+    else:
+        state.delete()
+        flash("Succesfully Removed","success")
+        return redirect(url_for('state.index'))

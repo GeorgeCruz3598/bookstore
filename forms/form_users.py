@@ -11,6 +11,7 @@ class CreateForm(FlaskForm):
     email = StringField('Email',validators=[DataRequired(), Email()])
     phone = StringField('Telefono',validators=[DataRequired()])
     submit = SubmitField('Registrar')
+    cancel = SubmitField('Cancelar')
     
 class EditForm(FlaskForm):
     name = StringField('Nombre',validators=[DataRequired(),Length(max=64)])
@@ -19,9 +20,10 @@ class EditForm(FlaskForm):
     email = StringField('Email',validators=[DataRequired(), Email()])
     phone = StringField('Telefono',validators=[DataRequired()])
     submit = SubmitField('Editar')
+    cancel = SubmitField('Cancelar')
 
 class LoginForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired(), Length(max=20)])
     passwd = PasswordField('Contraseña', validators=[DataRequired()])
     submit = SubmitField('Aceptar')
-    
+    cancel = SubmitField('Cancelar')

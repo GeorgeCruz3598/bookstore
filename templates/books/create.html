@@ -1,0 +1,141 @@
+{% extends 'base.html' %}
+{% block title %} BOOK | CREATE {% endblock %}
+{% block content %} 
+<!--only admin-->
+<div class="container">
+<h1 class="main-title-banner text-center">Nuevo Libro</h1>
+<div class="row justify-content-center"> {# Usa 'row' y 'justify-content-center' para centrar el contenido #}
+        {# Define el ancho de la columna en diferentes tamaños de pantalla #}
+    <div class="col-md-8 col-lg-6 form-panel-card">
+        <form action="{{url_for('book.create')}}" method="post" enctype="multipart/form-data" novalidate>
+            {{ form.hidden_tag() }}
+            <div class="mb-3">
+                {{ form.title.label(class="form-label") }}
+                {{ form.title(class="form-control")}} 
+                {% if form.title.errors %}
+                    <div class="invalid-feedback d-block">
+                        {% for error in form.title.errors %}
+                            <span style="color:red">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+            <div class="mb-3">
+                {{ form.author.label(class="form-label") }}
+                {{ form.author(class="form-control")}} 
+                {% if form.author.errors %}
+                    <div class="invalid-feedback d-block">
+                        {% for error in form.author.errors %}
+                            <span style="color:red">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+            <div class="mb-3">
+                {{ form.description.label(class="form-label") }}
+                {{ form.description(class="form-control")}} 
+                {% if form.description.errors %}
+                    <div class="invalid-feedback d-block">
+                        {% for error in form.description.errors %}
+                            <span style="color:red">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+            <div class="mb-3">
+                {{ form.language.label(class="form-label") }}
+                {{ form.language(class="form-control")}} 
+                {% if form.title.errors %}
+                    <div class="invalid-feedback d-block">
+                        {% for error in form.title.errors %}
+                            <span style="color:red">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+            
+            <div class="mb-3">
+                {{ form.price.label(class="form-label") }}
+                {{ form.price(class="form-control", placeholder="Monto con 2 decimales",step="0.01")}} 
+                {% if form.price.errors %}
+                    <div class="invalid-feedback d-block">
+                        {% for error in form.price.errors %}
+                            <span style="color:red">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+            <div class="mb-3">
+                {{ form.category_id.label(class="form-label") }}
+                {{ form.category_id(class="form-control")}} 
+                {% if form.category_id.errors %}
+                    <div class="invalid-feedback d-block">
+                        {% for error in form.category_id.errors %}
+                            <span style="color:red">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+            <div class="mb-3">
+                {{ form.state_id.label(class="form-label") }}
+                {{ form.state_id(class="form-control")}} 
+                {% if form.state_id.errors %}
+                    <div class="invalid-feedback d-block">
+                        {% for error in form.state_id.errors %}
+                            <span style="color:red">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+
+            <!--Cover Image Upload-->
+            <div class="mb-3">
+            
+                {{ form.cover(class="d-none", id="customCoverUpload") }}  
+                <label for="customCoverUpload" class="btn btn-light btn-sm custom-file-upload-button">
+                    <i class="bi bi-upload me-2"></i> Subir Nueva Portada
+                </label>
+                {# Opcional: Un span para mostrar el nombre del archivo seleccionado por el usuario #}
+                <span id="fileNameDisplay" class="ms-3 text-muted"></span>
+                
+                {% if form.cover.errors %}
+                    <div class="invalid-feedback d-block">
+                        {% for error in form.cover.errors %}
+                            <span style="color:red">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="mb-3 form-check d-flex align-items-center">
+                {{ form.is_active(class="form-check-input", id="is_active_check") }}
+                <label class="form-check-label ms-2" for="is_active_check">{{ form.is_active.label }}</label>
+                {% if form.is_active.errors %}
+                    <div class="invalid-feedback d-block">
+                        {% for error in form.is_active.errors %}
+                            <span style="color:red">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="my-3 d-flex justify-content-center">
+                {{ form.submit(class="btn btn-primary")}}
+                <span class="mx-3"></span>
+                {{ form.cancel(class="btn btn-danger")}}
+            </div>
+            
+        </form>
+    </div>
+</div>
+</div>
+{% endblock %}
+{% block scripts %}
+    {{ super() }} 
+    <script>
+        document.getElementById('customCoverUpload').addEventListener('change', function(e) {
+            var fileName = e.target.files[0] ? e.target.files[0].name : '';
+            document.getElementById('fileNameDisplay').textContent = fileName;
+        });
+    </script>
+{% endblock %}

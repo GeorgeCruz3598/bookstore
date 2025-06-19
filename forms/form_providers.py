@@ -11,6 +11,7 @@ class CreateForm(FlaskForm):
     is_active = BooleanField('Activo')
     
     submit = SubmitField('Registrar')
+    cancel = SubmitField('Cancelar')
     
 
 class EditForm(FlaskForm):
@@ -21,4 +22,4 @@ class EditForm(FlaskForm):
     is_active = BooleanField('Activo')
     
     submit = SubmitField('Editar')
-
+    cancel = SubmitField('Cancelar')

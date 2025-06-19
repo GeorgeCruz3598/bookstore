@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% block title %} BOOKS {% endblock %}
+{% block content %} 
+<div class="container mb-5">
+
+<h1 class="main-title-banner text-center">Libros Adicionados</h1>
+<a href="{{url_for('book.create')}}" class="btn btn-success my-3">Añadir Nuevo Libro</a>
+
+<div class="table-card-container">
+<div class="table mt-2 table-responsive">
+    <table class="table table-hover table-striped custom-table">
+        <thead class="custom-table-header">
+            <tr>
+                <th>ID</th><th >TITULO</th><th>CATEGORIA</th><th>ESTADO</th><th>PRECIO</th><th>STOCK</th><th>ACTIVO?</th><th colspan="3" class="text-center">ACCIONES</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in books %}
+                <tr>
+                    <td >{{item.id}}</td>
+                    <td >{{item.title}}</td>
+                    <td>{{item.category_relation.name}}</td>
+                    <td>{{item.state_relation.name}}</td>
+                    <td>{{item.price}}</td>
+                    <td>{{item.stock}}</td>
+                    <td>{% if item.is_active %}
+                            <p class="text-primary">SI</p>
+                        {%else%}
+                            <p class="text-danger">NO</p>
+                        {% endif %}
+                    </td>
+
+                    {#For floating Window#}    
+                     <td><button type="button" class="btn btn-sm btn-outline-secondary mb-2"
+                        data-bs-toggle="modal"
+                        data-bs-target="#synopsisModal"
+                        data-bs-title="{{ item.title }}"
+                        data-bs-author="{{ item.author }}"
+                        data-bs-updated-at="{{ item.updated_at.strftime('%d/%m/%Y') }}"
+                        data-bs-cover="{{ item.cover }}"
+                        data-bs-description="{{ item.description | e }}"> {# "| e" para escapar HTML seguro en el atributo data #}
+                        <i class="fas fa-book-open"></i> Detalles
+                    </button></td>
+                    
+                    <td><a href="{{url_for('book.edit',id=item.id)}}" class="btn btn-sm btn-primary ">Editar</a></td>
+                    <td><a href="{{url_for('book.delete',id=item.id)}}" class="btn btn-sm btn-danger " onclick="return(confirm('Desea eliminar este Libro?'))">Eliminar</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+</div>
+</div>
+
+{#For floating Window#}    
+<div class="modal fade" id="synopsisModal" tabindex="-1" aria-labelledby="synopsisModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="synopsisModalLabel"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body d-flex align-items-start"> 
+                    <div class="flex-shrink-0 me-3"> {# Contenedor para la imagen #}
+                        <img id="synopsisModalCover" src="" alt="Portada" 
+                             class="img-fluid rounded" 
+                             style="max-width: 130px; height: auto; object-fit: cover;"> 
+                    </div>
+                    <div class="flex-grow-1"> 
+                        <p class="text-muted mb-0" id="synopsisModalAuthor"></p>
+                        <p class="text-muted small mb-0" id="synopsisModalUpdatedAt"></p>
+                        <hr class="my-2">
+                        <p id="synopsisModalBody"></p> 
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %} 
+    {{super()}}
+{% endblock%}
