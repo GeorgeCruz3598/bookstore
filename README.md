@@ -16,7 +16,7 @@ LibroAmigo es una aplicación web de comercio electrónico desarrollada con Flas
 
 ## Tecnologías Utilizadas
 
-* **Backend:** Python 3, Flask, Flask-SQLAlchemy, Flask-Login, Werkzeug (para seguridad de contraseñas).
+* **Backend:** Python 3.11, Flask, Flask-SQLAlchemy, Flask-Login, Werkzeug (para seguridad de contraseñas).
 * **Base de Datos:** SQLite (por defecto, configurable para otras bases de datos relacionales).
 * **Frontend:** HTML5, CSS3, JavaScript.
 
@@ -26,7 +26,7 @@ Sigue estos pasos para levantar la aplicación en tu entorno local:
 
 1.  **Clonar el Repositorio:**
     ```bash
-    git clone [https://github.com/GeorgeCruz3598/bookstore.git](https://github.com/GeorgeCruz3598/bookstore.git)
+    git clone https://github.com/GeorgeCruz3598/bookstore.git
     cd bookstore
     ```
 
@@ -46,11 +46,10 @@ Sigue estos pasos para levantar la aplicación en tu entorno local:
         ```
 
 4.  **Instalar Dependencias:**
-   
+    ```bash
     pip install -r requirements.txt
     ```
-    (Asegúrate de que `Flask`, `Flask-SQLAlchemy`, `Flask-Login`, etc., estén listados en tu `requirements.txt`).
-
+    
 5.  **Inicializar la Base de Datos:**
     La base de datos SQLite (`bookstore.db`) se creará automáticamente la primera vez que se ejecute la aplicación si no existe. 
 
