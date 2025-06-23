@@ -144,7 +144,7 @@ def edit(id):
 def delete(id):
     book = Book.get_by_id(id)
     purchase_count = Purchase.get_by_book_id_count(id)
-    orders_count = Order.get_by_user_id_count(id)
+    orders_count = Order.get_by_book_id_count(id)
     
     if orders_count > 0:
         flash(f"No se puede eliminar el usuario '{book.title}' porque tiene {orders_count} pedidos asociados."
